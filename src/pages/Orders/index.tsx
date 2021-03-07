@@ -33,6 +33,18 @@ const Orders: React.FC = () => {
   useEffect(() => {
     async function loadOrders(): Promise<void> {
       // Load orders from API
+      const response = await api.get('/orders');
+
+      const items: Food[] = [];
+
+      response.data.forEach((order: Food) => {
+        items.push({
+          ...order,
+          formattedPrice: formatValue(order.price),
+        });
+      });
+
+      setOrders(items);
     }
 
     loadOrders();
@@ -47,6 +59,7 @@ const Orders: React.FC = () => {
       <FoodsContainer>
         <FoodList
           data={orders}
+          showsVerticalScrollIndicator={false}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <Food key={item.id} activeOpacity={0.6}>

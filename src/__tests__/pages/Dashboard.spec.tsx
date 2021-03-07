@@ -51,7 +51,7 @@ describe('Dashboard', () => {
         name: 'Veggie',
         description:
           'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
-        price: '21.90',
+        price: 21.9,
         category: 2,
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png',
@@ -137,7 +137,7 @@ describe('Dashboard', () => {
         name: 'Veggie',
         description:
           'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
-        price: '21.90',
+        price: 21.9,
         category: 2,
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png',
@@ -186,7 +186,7 @@ describe('Dashboard', () => {
         name: 'Veggie',
         description:
           'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
-        price: '21.90',
+        price: 21.9,
         category: 2,
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png',
@@ -301,7 +301,7 @@ describe('Dashboard', () => {
         name: 'Veggie',
         description:
           'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
-        price: '21.90',
+        price: 21.9,
         category: 2,
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png',
@@ -350,7 +350,7 @@ describe('Dashboard', () => {
         name: 'Veggie',
         description:
           'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
-        price: '21.90',
+        price: 21.9,
         category: 2,
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png',
@@ -472,7 +472,7 @@ describe('Dashboard', () => {
         name: 'Veggie',
         description:
           'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
-        price: '21.90',
+        price: 21.9,
         category: 2,
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png',

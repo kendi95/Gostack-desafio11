@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView } from 'react-native';
+import {
+  Image,
+  NativeSyntheticEvent,
+  ScrollView,
+  TextInputEndEditingEventData,
+} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
@@ -55,11 +60,50 @@ const Dashboard: React.FC = () => {
 
   async function handleNavigate(id: number): Promise<void> {
     // Navigate do ProductDetails page
+    navigation.navigate('FoodDetails', {
+      id,
+    });
+  }
+
+  async function handleSearchFoods(
+    event: NativeSyntheticEvent<TextInputEndEditingEventData>,
+  ): Promise<void> {
+    // const { text } = event.nativeEvent;
+    const response = await api.get('/foods', {
+      params: {
+        name: searchValue,
+      },
+    });
+    setFoods(response.data);
   }
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
       // Load Foods from API
+      const params = {};
+
+      if (selectedCategory) {
+        Object.assign(params, {
+          category: selectedCategory,
+        });
+      }
+
+      if (!searchValue) {
+        const response = await api.get('/foods', {
+          params,
+        });
+
+        const items: Food[] = [];
+
+        response.data.forEach((order: Food) => {
+          items.push({
+            ...order,
+            formattedPrice: formatValue(order.price),
+          });
+        });
+
+        setFoods(items);
+      }
     }
 
     loadFoods();
@@ -68,6 +112,8 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function loadCategories(): Promise<void> {
       // Load categories from API
+      const response = await api.get('/categories');
+      setCategories(response.data);
     }
 
     loadCategories();
@@ -75,6 +121,15 @@ const Dashboard: React.FC = () => {
 
   function handleSelectCategory(id: number): void {
     // Select / deselect category
+    setSelectedCategory(oldSelectedCategory => {
+      if (!oldSelectedCategory) {
+        return id;
+      }
+      if (oldSelectedCategory === id) {
+        return undefined;
+      }
+      return id;
+    });
   }
 
   return (
@@ -93,9 +148,11 @@ const Dashboard: React.FC = () => {
           value={searchValue}
           onChangeText={setSearchValue}
           placeholder="Qual comida você procura?"
+          returnKeyType="search"
+          onSubmitEditing={handleSearchFoods}
         />
       </FilterContainer>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <CategoryContainer>
           <Title>Categorias</Title>
           <CategorySlider
